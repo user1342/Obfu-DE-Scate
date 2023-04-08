@@ -24,9 +24,13 @@ def is_subpath(subpath, path):
 
     return False
 
+
 def create_output_file(sorted_functions):
-    # Function to create the output mapping file
-    f = open(os.path.join(output_dir,"mapping.txt"), "w")
+    '''
+    Function to create the output mapping file
+    :param sorted_functions: a dictionary of the final sorted methods
+    '''
+    f = open(os.path.join(output_dir, "mapping.txt"), "w")
 
     for function in sorted_functions:
         app_one_function_name = function
@@ -37,112 +41,116 @@ def create_output_file(sorted_functions):
 
 
 def create_html_file(sorted_functions):
-    # Sort the functions based on their score in descending order
+    '''
+    Sort the functions based on their score in descending order
+    :param sorted_functions: a dictionary of the final sorted methods
+    '''
+
     # Load HTML template
     template_str = '''
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Functions</title>
-    <style>
-        .codeblock-container {
-            display: flex;
-        }
-
-        .codeblock {
-            background-color: #f0f0f0;
-            padding: 10px;
-            border-radius: 5px;
-            flex: 1;
-            margin: 5px;
-        }
-
-        .codeblock h3 {
-            cursor: pointer;
-        }
-
-        .codeblock pre {
-            display: none;
-        }
-
-        .content {
-            display: none;
-        }
-
-        .visible {
-            display: block;
-        }
-    </style>
-    <script>
-        function toggleCodeBlock(id) {
-            var content = document.getElementById(id);
-            var codeblocks = content.getElementsByClassName("codeblock");
-            var preTags = content.getElementsByTagName("pre");
-            var displayValue = content.style.display === "none" ? "block" : "none";
-            content.style.display = displayValue;
-            for (var i = 0; i < codeblocks.length; i++) {
-                codeblocks[i].style.display = displayValue;
+    <!DOCTYPE html>
+    <html>
+    
+    <head>
+        <title>Functions</title>
+        <style>
+            .codeblock-container {
+                display: flex;
             }
-            for (var i = 0; i < preTags.length; i++) {
-                preTags[i].style.display = "none";
+    
+            .codeblock {
+                background-color: #f0f0f0;
+                padding: 10px;
+                border-radius: 5px;
+                flex: 1;
+                margin: 5px;
             }
-        }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            {% for function in sorted_functions %}
-            document.getElementById("{{ function }}_header").addEventListener("click", function () {
-                toggleCodeBlock("{{ function }}_content");
-            });
-            {% endfor %}
-        });
-        
-        // Update the code block display when clicking on the code block heading
-        document.addEventListener("DOMContentLoaded", function () {
-            var codeBlocks = document.getElementsByClassName("codeblock");
-            for (var i = 0; i < codeBlocks.length; i++) {
-                codeBlocks[i].getElementsByTagName("h3")[0].addEventListener("click", function () {
-                    this.nextElementSibling.style.display = this.nextElementSibling.style.display === "none" ? "block" : "none";
+    
+            .codeblock h3 {
+                cursor: pointer;
+            }
+    
+            .codeblock pre {
+                display: none;
+            }
+    
+            .content {
+                display: none;
+            }
+    
+            .visible {
+                display: block;
+            }
+        </style>
+        <script>
+            function toggleCodeBlock(id) {
+                var content = document.getElementById(id);
+                var codeblocks = content.getElementsByClassName("codeblock");
+                var preTags = content.getElementsByTagName("pre");
+                var displayValue = content.style.display === "none" ? "block" : "none";
+                content.style.display = displayValue;
+                for (var i = 0; i < codeblocks.length; i++) {
+                    codeblocks[i].style.display = displayValue;
+                }
+                for (var i = 0; i < preTags.length; i++) {
+                    preTags[i].style.display = "none";
+                }
+            }
+    
+            document.addEventListener("DOMContentLoaded", function () {
+                {% for function in sorted_functions %}
+                document.getElementById("{{ function }}_header").addEventListener("click", function () {
+                    toggleCodeBlock("{{ function }}_content");
                 });
-            }
-        });
-    </script>
-</head>
-
-<body style="font-family: Arial, sans-serif;">
-    <h1>Functions</h1>
-    <ul>
-        {% for function in sorted_functions %}
-        {% set app_one_function_name = function %}
-        {% set app_two_function_name = sorted_functions[function]['function'] %}
-        {% set score = sorted_functions[function]['score'] %}
-        {% set before_code = sorted_functions[function]['original method'] %}
-        {% set after_code = sorted_functions[function]['new method'] %}
-        <li>
-            <h2 id="{{ function }}_header" style="cursor: pointer;">{{ app_one_function_name }}</h2>
-            <div id="{{ function }}_content" class="content">
-                <h3>{{ app_one_function_name }} &rarr; {{ app_two_function_name }}</h3>
-                <p>Confidence: {{ score }}%</p>
-                <div class="codeblock-container">
-                    <div class="codeblock" id="{{ function }}_before">
-                        <h3>Before Code</h3>
-                        <pre>{{ before_code }}</pre>
-                    </div>
-                    <div class="codeblock" id="{{ function }}_after">
-                        <h3>After Code</h3>
-                        <pre>{{ after_code }}</pre>
+                {% endfor %}
+            });
+            
+            // Update the code block display when clicking on the code block heading
+            document.addEventListener("DOMContentLoaded", function () {
+                var codeBlocks = document.getElementsByClassName("codeblock");
+                for (var i = 0; i < codeBlocks.length; i++) {
+                    codeBlocks[i].getElementsByTagName("h3")[0].addEventListener("click", function () {
+                        this.nextElementSibling.style.display = this.nextElementSibling.style.display === "none" ? "block" : "none";
+                    });
+                }
+            });
+        </script>
+    </head>
+    
+    <body style="font-family: Arial, sans-serif;">
+        <h1>Functions</h1>
+        <ul>
+            {% for function in sorted_functions %}
+            {% set app_one_function_name = function %}
+            {% set app_two_function_name = sorted_functions[function]['function'] %}
+            {% set score = sorted_functions[function]['score'] %}
+            {% set before_code = sorted_functions[function]['original method'] %}
+            {% set after_code = sorted_functions[function]['new method'] %}
+            <li>
+                <h2 id="{{ function }}_header" style="cursor: pointer;">{{ app_one_function_name }}</h2>
+                <div id="{{ function }}_content" class="content">
+                    <h3>{{ app_one_function_name }} &rarr; {{ app_two_function_name }}</h3>
+                    <p>Confidence: {{ score }}%</p>
+                    <div class="codeblock-container">
+                        <div class="codeblock" id="{{ function }}_before">
+                            <h3>Before Code</h3>
+                            <pre>{{ before_code }}</pre>
+                        </div>
+                        <div class="codeblock" id="{{ function }}_after">
+                            <h3>After Code</h3>
+                            <pre>{{ after_code }}</pre>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
-    <script>
-        // You can add additional JavaScript code here if needed
-    </script>
-</body>
-
-</html>
+            </li>
+            {% endfor %}
+        </ul>
+        <script>
+            // You can add additional JavaScript code here if needed
+        </script>
+    </body>
+    
+    </html>
     '''
 
     # Create Jinja2 template from the template string
@@ -152,117 +160,130 @@ def create_html_file(sorted_functions):
     html = template.render(sorted_functions=sorted_functions)
 
     # Write the rendered HTML to a file
-    with open(os.path.join(output_dir,'output.html'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(output_dir, 'output.html'), 'w', encoding='utf-8') as f:
         f.write(html)
+
+
+def parse_arguments():
+    """Parse command line arguments and return the parsed values."""
+    parser = argparse.ArgumentParser(description="Compare two APKs and generate function mapping.")
+    parser.add_argument("-a1", "--apk_file_path_1", type=str, help="Path to APK 1", required=True)
+    parser.add_argument("-a2", "--apk_file_path_2", type=str, help="Path to APK 2", required=True)
+    parser.add_argument("-cp", "--class_path", type=str, help="Optional allow list class path")
+    parser.add_argument("-o", "--output_dir", type=str, help="Optional output directory for XML and TXT files")
+    parser.add_argument("-apktool", "--apk_tool_path", type=str, help="Optional local path to APK Tool if not on path")
+    args = parser.parse_args()
+    return args
+
+def extract_apk(apk_file_path, output_dir, apk_tool_executable):
+    """Use apktool to disassemble the APK file."""
+    print("Extracting APK at '{}'".format(apk_file_path))
+    with subprocess.Popen([apk_tool_executable, "d", apk_file_path, "-o", output_dir], stdin=subprocess.PIPE,
+                          stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True) as process:
+        stdout, stderr = process.communicate(input="\n")
+        if process.returncode != 0:
+            print("An error occurred while running apktool for APK:")
+            print(stderr)
+            exit(1)
+
+def check_apktool_on_path():
+    """Check if apktool is on the path and return the executable name."""
+    if shutil.which("apktool.bat"):
+        return "apktool.bat"
+    elif shutil.which("apktool.sh"):
+        return "apktool.sh"
+    elif shutil.which("apktool"):
+        return "apktool"
+    else:
+        return None
+
+def run_apktool(apk_tool_executable, apk_file_path, output_dir):
+    """Run apktool to disassemble the APK file."""
+    print("Extracting APK at '{}'".format(apk_file_path))
+    with subprocess.Popen([apk_tool_executable, "d", apk_file_path, "-o", output_dir], stdin=subprocess.PIPE,
+                          stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True) as process:
+        # Wait for the process to finish and capture the console output
+        stdout, stderr = process.communicate(input="\n")
+
+        # Check if the command was successful
+        if process.returncode != 0:
+            print("An error occurred while running apktool:")
+            print(stderr)
+            exit(1)
+
+def get_smali_files(apk_dir, allow_path):
+    """Get a list of all SMALI files in the disassembled APK directory."""
+    smali_files = []
+    file_to_path_dict = {}
+    for dirpath, dirnames, filenames in os.walk(apk_dir):
+        if is_subpath(allow_path, dirpath):
+            for filename in filenames:
+                if filename.endswith(".smali"):
+                    smali_files.append(os.path.join(dirpath, filename))
+                    file_to_path_dict[filename] = dirpath
+    return smali_files, file_to_path_dict
+
 
 if __name__ == '__main__':
     # Define argument parser
     parser = argparse.ArgumentParser(description="Compare two APKs and generate function mapping.")
 
     # Add required arguments
-    parser.add_argument("--apk_file_path_1", type=str, help="Path to APK 1", required= True)
-    parser.add_argument("--apk_file_path_2", type=str, help="Path to APK 2", required= True)
+    parser.add_argument("-a1", "--apk_file_path_1", type=str, help="Path to APK 1", required=True)
+    parser.add_argument("-a2", "--apk_file_path_2", type=str, help="Path to APK 2", required=True)
 
     # Add optional arguments
-    parser.add_argument("--class_path", type=str, help="Optional allow list class path")
-    parser.add_argument("--output_dir", type=str, help="Optional output directory for XML and TXT files")
-    parser.add_argument("--apk_tool_path", type=str, help="Optional local path to APK Tool if not on path")
+    parser.add_argument("-cp", "--class_path", type=str, help="Optional allow list class path")
+    parser.add_argument("-o", "--output_dir", type=str, help="Optional output directory for XML and TXT files")
+    parser.add_argument("-apktool", "--apk_tool_path", type=str, help="Optional local path to APK Tool if not on path")
     # Parse the command line arguments
     args = parser.parse_args()
 
     # Extract values from the parsed arguments
     APK_FILE_PATH_1 = args.apk_file_path_1
     APK_FILE_PATH_2 = args.apk_file_path_2
-    allow_list_class_path = args.allow_list_class_path
+    allow_list_class_path = args.class_path
     output_dir = args.output_dir
     apk_tool_path = args.apk_tool_path
 
+    if not allow_list_class_path:
+        allow_list_class_path = ""
+
+    # If no path is provided populate with ""
     if not apk_tool_path:
         apk_tool_path = ""
 
+    # If no path is provided set output dir to 'out'
     if not output_dir:
         output_dir = "out"
 
-    desired_class_path = allow_list_class_path
+    desired_class_path = os.path.join(*allow_list_class_path.split("."))
 
     # Output directories for the disassembled APKs
-    OUTPUT_DIR_1 = os.path.join(output_dir,"app_1_tmp")
-    OUTPUT_DIR_2 = os.path.join(output_dir,"app_2_tmp")
+    OUTPUT_DIR_1 = os.path.join(output_dir, "app_1_tmp")
+    OUTPUT_DIR_2 = os.path.join(output_dir, "app_2_tmp")
 
     # Check if apktool is on the path and use it if found
-    if shutil.which("apktool.bat"):
-        apk_tool_executable = "apktool.bat"
-    elif shutil.which("apktool.sh"):
-        apk_tool_executable = "apktool.sh"
-    elif shutil.which("apktool"):
-        apk_tool_executable = "apktool"
-    else:
-        # If apktool is not found on the path, use the APK_TOOL_PATH variable
-        if os.path.isfile(apk_tool_path):
-            APK_TOOL_PATH = apk_tool_path
-            apk_tool_executable = "java -jar {}".format(APK_TOOL_PATH)
+    apk_tool_executable = check_apktool_on_path()
+    if apk_tool_executable is None:
+        # If apktool is not found on the path, check if apk_tool_path is provided
+        if apk_tool_path:
+            apk_tool_executable = apk_tool_path
         else:
-            raise Exception("APK tool not found on path and '--apk_tool_path' paramiter not used or invalid path provided.")
-
-    # Use apktool to disassemble the first APK file
-    print("Extracting APK at '{}'".format(APK_FILE_PATH_1))
-    with subprocess.Popen([apk_tool_executable, "d", APK_FILE_PATH_1, "-o", OUTPUT_DIR_1], stdin=subprocess.PIPE,
-                          stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True) as process:
-        # Wait for the process to finish and capture the console output
-        stdout, stderr = process.communicate(input="\n")
-
-        # Check if the command was successful
-        if process.returncode != 0:
-            print("An error occurred while running apktool for APK 1:")
-            print(stderr)
+            print("APKTool not found on the path. Please provide a valid apk_tool_path.")
             exit(1)
 
-        # Print the console output of apktool
-        # print(stdout)
-        # print(stderr)
+    # Run apktool to disassemble APK 1
+    run_apktool(apk_tool_executable, APK_FILE_PATH_1, OUTPUT_DIR_1)
 
-    # Use apktool to disassemble the second APK file
-    print("Extracting APK at '{}'".format(APK_FILE_PATH_2))
-    with subprocess.Popen([apk_tool_executable, "d", APK_FILE_PATH_2, "-o", OUTPUT_DIR_2], stdin=subprocess.PIPE,
-                          stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True) as process:
-        # Wait for the process to finish and capture the console output
-        stdout, stderr = process.communicate(input="\n")
+    # Run apktool to disassemble APK 2
+    run_apktool(apk_tool_executable, APK_FILE_PATH_2, OUTPUT_DIR_2)
 
-        # Check if the command was successful
-        if process.returncode != 0:
-            print("An error occurred while running apktool for APK 2:")
-            print(stderr)
-            exit(1)
+    # Get list of SMALI files from disassembled APK 1
+    smali_files_1, file_to_path_dict_1 = get_smali_files(OUTPUT_DIR_1, desired_class_path)
 
-        # Print the console output of apktool
-        # print(stdout)
-        # print(stderr)
-
-    # Get a list of all SMALI files in the disassembled APKs
-    #
-
-    allow_path = os.path.join("")
-    if desired_class_path != "." and desired_class_path != "":
-        allow_path = os.path.join(*desired_class_path.split("."))
-
-    smali_files_1 = []
-    app_1_one_dict_file_to_path = {}
-    for dirpath, dirnames, filenames in os.walk(OUTPUT_DIR_1):
-        if is_subpath(allow_path,dirpath):
-            for filename in filenames:
-                if filename.endswith(".smali"):
-                    smali_files_1.append(os.path.join(dirpath, filename))
-                    app_1_one_dict_file_to_path[filename] = dirpath
-
-    smali_files_2 = []
-    app_2_one_dict_file_to_path = {}
-
-    for dirpath, dirnames, filenames in os.walk(OUTPUT_DIR_2):
-        if is_subpath(allow_path,dirpath):
-            for filename in filenames:
-                if filename.endswith(".smali"):
-                    smali_files_2.append(os.path.join(dirpath, filename))
-                    app_2_one_dict_file_to_path[filename] = dirpath
+    # Get list of SMALI files from disassembled APK 2
+    smali_files_2, file_to_path_dict_2 = get_smali_files(OUTPUT_DIR_2, desired_class_path)
 
     app_one_method_to_smali_file = {}
     # Get a list of all SMALI methods in the disassembled APKs
@@ -377,5 +398,3 @@ if __name__ == '__main__':
 
     create_html_file(sorted_functions)
     create_output_file(sorted_functions)
-    #os.rmdir(OUTPUT_DIR_1)
-    #os.rmdir(OUTPUT_DIR_2)
