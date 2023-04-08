@@ -183,7 +183,7 @@ def parse_arguments():
 
 def extract_apk(apk_file_path, output_dir, apk_tool_executable):
     """Use apktool to disassemble the APK file."""
-    print("Extracting APK at '{}'".format(apk_file_path))
+    print("Extracting APK at '{}'. This may take some time...".format(apk_file_path))
     with subprocess.Popen([apk_tool_executable, "d", apk_file_path, "-o", output_dir], stdin=subprocess.PIPE,
                           stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True) as process:
         stdout, stderr = process.communicate(input="\n")
