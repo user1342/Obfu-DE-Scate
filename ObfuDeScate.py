@@ -379,6 +379,7 @@ if __name__ == '__main__':
 
             iterator = iterator - 1
 
+            # Confidence too low, so break
             if iterator < 60:
                 break
 
@@ -389,6 +390,7 @@ if __name__ == '__main__':
         else:
             sorted_functions[function_def] = {"score": 0, "function": "no match", "original method": "", "new method": ""}
 
+    # Sort dict on sub-dict value score
     sorted_functions = {k: v for k, v in sorted(sorted_functions.items(), key=lambda item: item[1]['score'], reverse=True)}
 
     # Check if output_dir exists
