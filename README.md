@@ -41,7 +41,7 @@ To compare two APK files, simply run Obfu[DE]scate with the following command:
 python ObfuDeScate.py -a1 "old_example.apk" -a2 "new_example.apk" -cp "com.example.path"
 ```
 
-In the above example, Obfu[DE]scate will review all functions in the old_example.apk APK at the class path com.example.path and compare them against all functions found at the same class path in new_example.apk.
+In the above example, Obfu[DE]scate will review all functions in the ```old_example.apk``` APK at the class path ```com.example.path``` and compare them against all functions found at the same class path in ```new_example.apk```.
 
 # 🔎 Outputs
 Obfu[DE]scate generates two output files: a mapping file in newline-separated list format, and an interactive HTML file. Here are examples of what they look like:
