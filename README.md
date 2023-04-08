@@ -2,29 +2,30 @@
     <img width=100% src="/assets/cover.png">
   </a>
 </p>
-<p align="center"> 🤖 A de-obfuscation tool for Android APKs. Allowing you to compare multiple versions of an APK to identify the same code across renamed, altered, and missing functions. 📱 </p>
+<p align="center"> 🤖 <b> Obfu[DE]scate: A De-obfuscation and Comparison tool for Android APKs. 📱 </b> </p>
 
 <br>
 
-Obfu[DE]scate is a Python tool designed to take two versions of an APK file and use fuzzy comparison logic to identify similarities between functions even if they've been renamed as part of obfuscation. 
-- To get started, download the dependancies and ensure you have APKTool installed and on your path.
-- Get two versions of an APK and run ```ObfuDeScate.py``` with then as paramiters (use ```--apk_file_path_1``` and ```--apk_file_path_2```).
-- After run, an ouput directory will be created with a mapping text file and full breakdown HTML file.
+Obfu[DE]scate is a powerful Python tool designed to simplify the process of de-obfuscating and comparing two versions of an Android APK file, even if the functions have been renamed as part of obfuscation. With fuzzy comparison logic, Obfu[DE]scate can identify similarities between functions and help you uncover hidden changes between APK versions.
 
-# ➡️ Getting Started 
-## Installation 
-After cloning the repository all Obfu[DE]scate dependencies can be installed manually or via the requirements file, with:
+Obfu[DE]scate makes de-obfuscation and comparison of Android APKs easy and efficient, helping you uncover hidden changes and understand the differences between APK versions. Try it out now and simplify your APK analysis workflow! 👍🔍🚀
 
-``` bash
+# ➡️ Getting Started
+## Installation
+Getting started with Obfu[DE]scate is easy! Follow these steps:
+
+1) Clone the repository to your local machine.
+2) Install the dependencies manually or via the included requirements file using the following command:
+```bash
 pip install -r REQUIREMENTS.txt
 ```
+3) **Download APKTool for your system from [their website](https://ibotpeaches.github.io/Apktool/documentation/). and make sure it's installed and available in your PATH.**
 
-In addition to the above, you will also need a copy of APKTool either on your path or provided with the ```--apk_tool_path``` paramiter. Download APKTool for your system as directed on [their website](https://ibotpeaches.github.io/Apktool/).
 
-Obfu[DE]scate has only been tested on **Windows 11**, however, should work with other systems. 
+Obfu[DE]scate has been tested on *Windows 11*, but should work on other systems as well.
 
 ## Options
-Obfu[DE]scate takes the following paramiters:
+Obfu[DE]scate provides several command-line options to customize its behavior:
 
 | Shorthand | Paramiter         | Description                                                                                                                                            | Required |
 |-----------|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
@@ -34,20 +35,21 @@ Obfu[DE]scate takes the following paramiters:
 | -o        | output_dir      | A directory to save the output mapping, html, and dissasembled APKs to.                                                                                | False    |
 | -apktool  | apk_tool_path   | If APKTool is not on your path use this parameter to tell ObfuDeScate where APKTool is located.                                                        | False    |
 
-## Running
-The quickest way to use Obfu[DE]scate is to provide it with two APK files and a class path to compare. Providing a class path will drastically improve the comparison time and will limit it to only the class functions you care about. See below:
+To compare two APK files, simply run Obfu[DE]scate with the following command:
 
 ```bash 
 python ObfuDeScate.py -a1 "old_example.apk" -a2 "new_example.apk" -cp "com.example.path"
 ```
-In the above example Obfu[DE]scate will review all functions in the ```old_example.apk``` APK at the class path ```com.example.path``` and will compare them against all functions found at the same class path in ```new_example.apk```. 
+
+In the above example, Obfu[DE]scate will review all functions in the old_example.apk APK at the class path com.example.path and compare them against all functions found at the same class path in new_example.apk.
 
 # 🔎 Outputs
-Obfu[DE]scate creates two output files, a mapping new line seperated list and an interactive HTML file. Examples of these can be found below:
+Obfu[DE]scate generates two output files: a mapping file in newline-separated list format, and an interactive HTML file. Here are examples of what they look like:
 
-<br>
 <p align="center">
   <img src="/assets/html_example.png" width="400" />
   <img src="/assets/mapping_example.png" width="400" />
 </p>
-<br>
+
+# 📜 License
+[GNU General Public License v3.0](https://choosealicense.com/licenses/gpl-3.0/)
