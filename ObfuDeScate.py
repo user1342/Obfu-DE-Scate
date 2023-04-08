@@ -164,7 +164,7 @@ if __name__ == '__main__':
     parser.add_argument("--apk_file_path_2", type=str, help="Path to APK 2", required= True)
 
     # Add optional arguments
-    parser.add_argument("--allow_list_class_path", type=str, help="Optional allow list class path")
+    parser.add_argument("--class_path", type=str, help="Optional allow list class path")
     parser.add_argument("--output_dir", type=str, help="Optional output directory for XML and TXT files")
     parser.add_argument("--apk_tool_path", type=str, help="Optional local path to APK Tool if not on path")
     # Parse the command line arguments
