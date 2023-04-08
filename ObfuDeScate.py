@@ -297,7 +297,7 @@ if __name__ == '__main__':
         app_one_function_def = app_one_method.split("\n")[0].replace("->", ".")
         for app_two_method in smali_methods_2:
             app_two_function_def = app_two_method.split("\n")[0]
-            score = fuzz.partial_ratio(app_one_method, app_two_method)
+            score = fuzz.ratio(app_one_method, app_two_method)
             # score = is_same(app_one_method, app_two_method)
 
             app_one_function_name = re.search(r'\s*(\w+)\s*\(', app_one_function_def)
