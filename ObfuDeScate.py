@@ -305,8 +305,8 @@ if __name__ == '__main__':
 
             app_one_file = app_one_method_to_smali_file[app_one_method]
             app_two_file = app_two_method_to_smali_file[app_two_method]
-            app_one_file_path = os.path.split(app_one_file)[0].split(os.sep)[2:]
-            app_two_file_path = os.path.split(app_two_file)[0].split(os.sep)[2:]
+            app_one_file_path = os.path.split(app_one_file.replace(OUTPUT_DIR_1,""))[0].split(os.sep)[2:]
+            app_two_file_path = os.path.split(app_two_file.replace(OUTPUT_DIR_2,""))[0].split(os.sep)[2:]
 
             app_one_class_name = os.path.split(app_one_file)[1].replace(".smali", "")
             if "$" in app_one_class_name:
