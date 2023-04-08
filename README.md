@@ -24,7 +24,7 @@ pip install -r REQUIREMENTS.txt
 
 Obfu[DE]scate has been tested on *Windows 11*, but should work on other systems as well.
 
-## Options
+## Running
 Obfu[DE]scate provides several command-line options to customize its behavior:
 
 | Shorthand | Paramiter         | Description                                                                                                                                            | Required |
