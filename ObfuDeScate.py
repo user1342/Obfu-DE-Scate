@@ -10,6 +10,11 @@ from tqdm import tqdm
 
 
 def is_subpath(subpath, path):
+    '''
+    Simple function to identify if one path is a subpath of anouther. Used for only checking directories that are
+    part of the class path.
+    :return: boolean (True/ False)
+    '''
     subpath = os.path.normpath(subpath)
     path = os.path.normpath(path)
 
@@ -50,14 +55,14 @@ def create_html_file(sorted_functions):
     template_str = '''
     <!DOCTYPE html>
     <html>
-    
+
     <head>
         <title>Functions</title>
         <style>
             .codeblock-container {
                 display: flex;
             }
-    
+
             .codeblock {
                 background-color: #f0f0f0;
                 padding: 10px;
@@ -65,19 +70,19 @@ def create_html_file(sorted_functions):
                 flex: 1;
                 margin: 5px;
             }
-    
+
             .codeblock h3 {
                 cursor: pointer;
             }
-    
+
             .codeblock pre {
                 display: none;
             }
-    
+
             .content {
                 display: none;
             }
-    
+
             .visible {
                 display: block;
             }
@@ -96,7 +101,7 @@ def create_html_file(sorted_functions):
                     preTags[i].style.display = "none";
                 }
             }
-    
+
             document.addEventListener("DOMContentLoaded", function () {
                 {% for function in sorted_functions %}
                 document.getElementById("{{ function }}_header").addEventListener("click", function () {
@@ -104,7 +109,7 @@ def create_html_file(sorted_functions):
                 });
                 {% endfor %}
             });
-            
+
             // Update the code block display when clicking on the code block heading
             document.addEventListener("DOMContentLoaded", function () {
                 var codeBlocks = document.getElementsByClassName("codeblock");
@@ -116,7 +121,7 @@ def create_html_file(sorted_functions):
             });
         </script>
     </head>
-    
+
     <body style="font-family: Arial, sans-serif;">
         <h1>Functions</h1>
         <ul>
@@ -149,7 +154,7 @@ def create_html_file(sorted_functions):
             // You can add additional JavaScript code here if needed
         </script>
     </body>
-    
+
     </html>
     '''
 
@@ -175,6 +180,7 @@ def parse_arguments():
     args = parser.parse_args()
     return args
 
+
 def extract_apk(apk_file_path, output_dir, apk_tool_executable):
     """Use apktool to disassemble the APK file."""
     print("Extracting APK at '{}'".format(apk_file_path))
@@ -186,6 +192,7 @@ def extract_apk(apk_file_path, output_dir, apk_tool_executable):
             print(stderr)
             exit(1)
 
+
 def check_apktool_on_path():
     """Check if apktool is on the path and return the executable name."""
     if shutil.which("apktool.bat"):
@@ -196,6 +203,7 @@ def check_apktool_on_path():
         return "apktool"
     else:
         return None
+
 
 def run_apktool(apk_tool_executable, apk_file_path, output_dir):
     """Run apktool to disassemble the APK file."""
@@ -211,6 +219,7 @@ def run_apktool(apk_tool_executable, apk_file_path, output_dir):
             print(stderr)
             exit(1)
 
+
 def get_smali_files(apk_dir, allow_path):
     """Get a list of all SMALI files in the disassembled APK directory."""
     smali_files = []
@@ -225,19 +234,9 @@ def get_smali_files(apk_dir, allow_path):
 
 
 if __name__ == '__main__':
-    # Define argument parser
-    parser = argparse.ArgumentParser(description="Compare two APKs and generate function mapping.")
 
-    # Add required arguments
-    parser.add_argument("-a1", "--apk_file_path_1", type=str, help="Path to APK 1", required=True)
-    parser.add_argument("-a2", "--apk_file_path_2", type=str, help="Path to APK 2", required=True)
-
-    # Add optional arguments
-    parser.add_argument("-cp", "--class_path", type=str, help="Optional allow list class path")
-    parser.add_argument("-o", "--output_dir", type=str, help="Optional output directory for XML and TXT files")
-    parser.add_argument("-apktool", "--apk_tool_path", type=str, help="Optional local path to APK Tool if not on path")
     # Parse the command line arguments
-    args = parser.parse_args()
+    args = parse_arguments()
 
     # Extract values from the parsed arguments
     APK_FILE_PATH_1 = args.apk_file_path_1
@@ -246,9 +245,6 @@ if __name__ == '__main__':
     output_dir = args.output_dir
     apk_tool_path = args.apk_tool_path
 
-    if not allow_list_class_path:
-        allow_list_class_path = ""
-
     # If no path is provided populate with ""
     if not apk_tool_path:
         apk_tool_path = ""
@@ -256,6 +252,10 @@ if __name__ == '__main__':
     # If no path is provided set output dir to 'out'
     if not output_dir:
         output_dir = "out"
+
+    # Set a generic class path if not set
+    if not allow_list_class_path:
+        allow_list_class_path = output_dir
 
     desired_class_path = os.path.join(*allow_list_class_path.split("."))
 
@@ -270,7 +270,8 @@ if __name__ == '__main__':
         if apk_tool_path:
             apk_tool_executable = apk_tool_path
         else:
-            print("APKTool not found on the path. Please provide a valid apk_tool_path.")
+            print(
+                "APKTool not found on the PATH. Either add 'apktool.sh'/ apktool.bat' to your path or provide a local path via the '--apk_tool_path' paramiter.")
             exit(1)
 
     # Run apktool to disassemble APK 1
@@ -326,8 +327,8 @@ if __name__ == '__main__':
 
             app_one_file = app_one_method_to_smali_file[app_one_method]
             app_two_file = app_two_method_to_smali_file[app_two_method]
-            app_one_file_path = os.path.split(app_one_file.replace(OUTPUT_DIR_1,""))[0].split(os.sep)[2:]
-            app_two_file_path = os.path.split(app_two_file.replace(OUTPUT_DIR_2,""))[0].split(os.sep)[2:]
+            app_one_file_path = os.path.split(app_one_file.replace(OUTPUT_DIR_1, ""))[0].split(os.sep)[2:]
+            app_two_file_path = os.path.split(app_two_file.replace(OUTPUT_DIR_2, ""))[0].split(os.sep)[2:]
 
             app_one_class_name = os.path.split(app_one_file)[1].replace(".smali", "")
             if "$" in app_one_class_name:
@@ -388,10 +389,12 @@ if __name__ == '__main__':
                                               "original method": app_one_path_to_method[function_def],
                                               "new method": app_two_path_to_mathod[highest_match_function]}
         else:
-            sorted_functions[function_def] = {"score": 0, "function": "no match", "original method": "", "new method": ""}
+            sorted_functions[function_def] = {"score": 0, "function": "no match", "original method": "",
+                                              "new method": ""}
 
     # Sort dict on sub-dict value score
-    sorted_functions = {k: v for k, v in sorted(sorted_functions.items(), key=lambda item: item[1]['score'], reverse=True)}
+    sorted_functions = {k: v for k, v in
+                        sorted(sorted_functions.items(), key=lambda item: item[1]['score'], reverse=True)}
 
     # Check if output_dir exists
     if not os.path.exists(output_dir):
