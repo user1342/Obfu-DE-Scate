@@ -19,6 +19,6 @@ After cloning the repository all Obfu[DE]scate dependencies can be installed man
 pip install -r REQUIREMENTS.txt
 ```
 
-In addition to the above, you will also need a copy of APKTool either on your path or provided with the ```--apk_tool_path``` paramiter. Download APKTool for your system as directed on [their website]([https://developer.android.com/studio](https://ibotpeaches.github.io/Apktool/))
+In addition to the above, you will also need a copy of APKTool either on your path or provided with the ```--apk_tool_path``` paramiter. Download APKTool for your system as directed on [their website](https://ibotpeaches.github.io/Apktool/).
 
 Obfu[DE]scate has only been tested on **Windows 11**, however, should work with other systems. 
