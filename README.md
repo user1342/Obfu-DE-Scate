@@ -47,7 +47,7 @@ Obfu[DE]scate creates two output files, a mapping new line seperated list and an
 
 <br>
 <p align="center">
-  <img src="/assets/html_example.png" width="500" />
-  <img src="/assets/mapping_example.png" width="500" />
+  <img src="/assets/html_example.png" width="400" />
+  <img src="/assets/mapping_example.png" width="400" />
 </p>
 <br>
