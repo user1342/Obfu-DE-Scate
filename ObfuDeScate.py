@@ -400,3 +400,4 @@ if __name__ == '__main__':
 
     create_html_file(sorted_functions)
     create_output_file(sorted_functions)
+    print("Outputs saved in '{}'".format(output_dir))
