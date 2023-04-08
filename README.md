@@ -1,5 +1,5 @@
 <p align="center">
-    <img width=100% src="cover.png">
+    <img width=100% src="/assets/cover.png">
   </a>
 </p>
 <p align="center"> 🤖 A de-obfuscation tool for Android APKs. Allowing you to compare multiple versions of an APK to identify the same code across renamed, altered, and missing functions. 📱 </p>
@@ -47,7 +47,7 @@ Obfu[DE]scate creates two output files, a mapping new line seperated list and an
 
 <br>
 <p align="center">
-  <img src="/Images/screenshot_1.png" width="200" />
-  <img src="/Images/screenshot_2.png" width="200" />
+  <img src="/assets/html_example.png" width="500" />
+  <img src="/assets/mapping_example.png" width="500" />
 </p>
 <br>
