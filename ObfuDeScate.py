@@ -288,7 +288,7 @@ if __name__ == '__main__':
     app_one_method_to_smali_file = {}
     # Get a list of all SMALI methods in the disassembled APKs
     smali_methods_1 = []
-    for smali_file in smali_files_1:
+    for smali_file in tqdm(smali_files_1, desc="Aggregating Methods from APK 1 SMALI"):
         with open(smali_file, "r") as f:
             content = f.read()
             methods = content.split(".method")
@@ -300,7 +300,7 @@ if __name__ == '__main__':
     app_two_method_to_smali_file = {}
 
     smali_methods_2 = []
-    for smali_file in smali_files_2:
+    for smali_file in tqdm(smali_files_2, desc="Aggregating Methods from APK 2 SMALI"):
         with open(smali_file, "r") as f:
             content = f.read()
             methods = content.split(".method")
@@ -314,7 +314,7 @@ if __name__ == '__main__':
 
     scores = {}
     dict_of_functions = {}
-    for app_one_method in tqdm(smali_methods_1):
+    for app_one_method in tqdm(smali_methods_1, desc="Correlating comparison scores between APK1 and APK2 methods."):
         app_one_function_def = app_one_method.split("\n")[0].replace("->", ".")
         for app_two_method in smali_methods_2:
             app_two_function_def = app_two_method.split("\n")[0]
