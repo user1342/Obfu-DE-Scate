@@ -43,3 +43,11 @@ python ObfuDeScate.py -a1 "old_example.apk" -a2 "new_example.apk" -cp "com.examp
 In the above example Obfu[DE]scate will review all functions in the ```old_example.apk``` APK at the class path ```com.example.path``` and will compare them against all functions found at the same class path in ```new_example.apk```. 
 
 # 🔎 Outputs
+Obfu[DE]scate creates two output files, a mapping new line seperated list and an interactive HTML file. Examples of these can be found below:
+
+<br>
+<p align="center">
+  <img src="/Images/screenshot_1.png" width="200" />
+  <img src="/Images/screenshot_2.png" width="200" />
+</p>
+<br>
