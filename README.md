@@ -52,5 +52,8 @@ Obfu[DE]scate generates two output files: a mapping file in newline-separated li
   <img src="/assets/running.gif" width="400" />
 </p>
 
+# 💛 Thanks
+This tool wouldn't work without [APKTool](https://ibotpeaches.github.io/Apktool/documentation/)! Secondly, many of the examples in this README use the Chess.com app as a base, check it out [here](https://play.google.com/store/apps/dev?id=5068259210636929122).
+
 # 📜 License
 [GNU General Public License v3.0](https://choosealicense.com/licenses/gpl-3.0/)
