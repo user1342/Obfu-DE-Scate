@@ -24,14 +24,14 @@ In addition to the above, you will also need a copy of APKTool either on your pa
 Obfu[DE]scate has only been tested on **Windows 11**, however, should work with other systems. 
 
 # ⚙️ Options
+Obfu[DE]scate takes the following paramiters:
 
-| Name                    | Description                                                                                                                                            | Required |
-|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
-| --apk_file_path_1       | The path to the original APK. This is the APK that the second APK will be compared against (i.e. an older version of the APK)                          | True     |
-| --apk_file_path_2       | The path to the newer APK. The output will show name changes between APK 1 and this APK.                                                               | True     |
-| --allow_class_path | A reverse domain notation path that will be used to filter reviewed functions (i.e. provide com.example.class to only compare functions on this path). | False    |
-| --output_dir            | A directory to save the output mapping, html, and dissasembled APKs to.                                                                                | False    |
-| --apk_tool_path         | If APKTool is not on your path use this parameter to tell ObfuDeScate where APKTool is located.                                                        | False    |
-
+| Shorthand | Paramiter         | Description                                                                                                                                            | Required |
+|-----------|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+| -a1       | --apk_file_path_1 | The path to the original APK. This is the APK that the second APK will be compared against (i.e. an older version of the APK)                          | True     |
+| -a2       | --apk_file_path_2 | The path to the newer APK. The output will show name changes between APK 1 and this APK.                                                               | True     |
+| -cp       | --class_path      | A reverse domain notation path that will be used to filter reviewed functions (i.e. provide com.example.class to only compare functions on this path). | False    |
+| -o        | --output_dir      | A directory to save the output mapping, html, and dissasembled APKs to.                                                                                | False    |
+| -apktool  | --apk_tool_path   | If APKTool is not on your path use this parameter to tell ObfuDeScate where APKTool is located.                                                        | False    |
 
 # 🔎 Outputs
