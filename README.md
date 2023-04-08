@@ -6,9 +6,7 @@
 
 <br>
 
-Obfu[DE]scate is a powerful Python tool designed to simplify the process of de-obfuscating and comparing two versions of an Android APK file, even if the functions have been renamed as part of obfuscation. With fuzzy comparison logic, Obfu[DE]scate can identify similarities between functions and help you uncover hidden changes between APK versions.
-
-Obfu[DE]scate makes de-obfuscation and comparison of Android APKs easy and efficient, helping you uncover hidden changes and understand the differences between APK versions. Try it out now and simplify your APK analysis workflow! 👍🔍🚀
+Obfu[DE]scate is a powerful Python tool designed to simplify the process of de-obfuscating and comparing two versions of an Android APK file, even if the functions have been renamed as part of obfuscation. With fuzzy comparison logic, Obfu[DE]scate can identify similarities between functions and help you uncover changes between APK versions.
 
 # ➡️ Getting Started
 ## Installation
