@@ -1,3 +1,4 @@
 fuzzywuzzy
 jinja2
 tqdm
+python-Levenshtein
