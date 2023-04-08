@@ -164,7 +164,7 @@ if __name__ == '__main__':
     parser.add_argument("--apk_file_path_2", type=str, help="Path to APK 2", required= True)
 
     # Add optional arguments
-    parser.add_argument("--allow_list_class_path", type=str, help="Optional allow list class path")
+    parser.add_argument("--class_path", type=str, help="Optional allow list class path")
     parser.add_argument("--output_dir", type=str, help="Optional output directory for XML and TXT files")
     parser.add_argument("--apk_tool_path", type=str, help="Optional local path to APK Tool if not on path")
     # Parse the command line arguments
@@ -297,7 +297,7 @@ if __name__ == '__main__':
         app_one_function_def = app_one_method.split("\n")[0].replace("->", ".")
         for app_two_method in smali_methods_2:
             app_two_function_def = app_two_method.split("\n")[0]
-            score = fuzz.partial_ratio(app_one_method, app_two_method)
+            score = fuzz.ratio(app_one_method, app_two_method)
             # score = is_same(app_one_method, app_two_method)
 
             app_one_function_name = re.search(r'\s*(\w+)\s*\(', app_one_function_def)
@@ -305,8 +305,8 @@ if __name__ == '__main__':
 
             app_one_file = app_one_method_to_smali_file[app_one_method]
             app_two_file = app_two_method_to_smali_file[app_two_method]
-            app_one_file_path = os.path.split(app_one_file)[0].split(os.sep)[2:]
-            app_two_file_path = os.path.split(app_two_file)[0].split(os.sep)[2:]
+            app_one_file_path = os.path.split(app_one_file.replace(OUTPUT_DIR_1,""))[0].split(os.sep)[2:]
+            app_two_file_path = os.path.split(app_two_file.replace(OUTPUT_DIR_2,""))[0].split(os.sep)[2:]
 
             app_one_class_name = os.path.split(app_one_file)[1].replace(".smali", "")
             if "$" in app_one_class_name:
