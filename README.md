@@ -23,7 +23,7 @@ In addition to the above, you will also need a copy of APKTool either on your pa
 
 Obfu[DE]scate has only been tested on **Windows 11**, however, should work with other systems. 
 
-# ⚙️ Options
+## Options
 Obfu[DE]scate takes the following paramiters:
 
 | Shorthand | Paramiter         | Description                                                                                                                                            | Required |
@@ -33,5 +33,13 @@ Obfu[DE]scate takes the following paramiters:
 | -cp       | class_path      | A reverse domain notation path that will be used to filter reviewed functions (i.e. provide com.example.class to only compare functions on this path). | False    |
 | -o        | output_dir      | A directory to save the output mapping, html, and dissasembled APKs to.                                                                                | False    |
 | -apktool  | apk_tool_path   | If APKTool is not on your path use this parameter to tell ObfuDeScate where APKTool is located.                                                        | False    |
+
+## Running
+The quickest way to use Obfu[DE]scate is to provide it with two APK files and a class path to compare. Providing a class path will drastically improve the comparison time and will limit it to only the class functions you care about. See below:
+
+```bash 
+python ObfuDeScate.py -a1 "old_example.apk" -a2 "new_example.apk" -cp "com.example.path"
+```
+In the above example Obfu[DE]scate will review all functions in the ```old_example.apk``` APK at the class path ```com.example.path``` and will compare them against all functions found at the same class path in ```new_example.apk```. 
 
 # 🔎 Outputs
