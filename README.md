@@ -25,7 +25,7 @@ Obfu[DE]scate has been tested on *Windows 11*, but should work on other systems 
 ## Running
 Obfu[DE]scate provides several command-line options to customize its behavior:
 
-| Shorthand | Paramiter         | Description                                                                                                                                            | Required |
+| Shorthand | Parameter         | Description                                                                                                                                            | Required |
 |-----------|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
 | -a1       | apk_file_path_1 | The path to the original APK. This is the APK that the second APK will be compared against (i.e. an older version of the APK)                          | True     |
 | -a2       | apk_file_path_2 | The path to the newer APK. The output will show changes between APK 1 and this APK.                                                               | True     |
