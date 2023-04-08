@@ -42,11 +42,14 @@ python ObfuDeScate.py -a1 "old_example.apk" -a2 "new_example.apk" -cp "com.examp
 In the above example, Obfu[DE]scate will review all functions in the ```old_example.apk``` APK at the class path ```com.example.path``` and compare them against all functions found at the same class path in ```new_example.apk```.
 
 # 🔎 Outputs
-Obfu[DE]scate generates two output files: a mapping file in newline-separated list format, and an interactive HTML file. Here are examples of what they look like:
+Obfu[DE]scate generates two output files: a mapping file in newline-separated list format, and an interactive HTML file. These output files include:
+- **mapping.txt** - A newline seperated text file with each line relating to an identified match between a method in APK1 and APK2. The format for these lines are such as: ```com.chess.play.ObserveGameHelperImpl.d -> com.chess.play.ObserveGameHelperImpl.a ```.
+- **output.html** - A HTML file that when opened in a web browser lists all functions in APK1. These are dropdowns that when clicked show the matched method in APK2 (if any), the confidence of them being a match, and the codeblock in SMALI for that method from APK1 and APK2. 
 
 <p align="center">
   <img src="/assets/html_example.png" width="400" />
   <img src="/assets/mapping_example.png" width="400" />
+  <img src="/assets/running.gif" width="400" />
 </p>
 
 # 📜 License
