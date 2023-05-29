@@ -4,7 +4,6 @@
 </p>
 <p align="center"> 🤖 <b> Obfu[DE]scate: A De-obfuscation and Comparison tool for Android APKs. 📱 </b> </p>
 
-<br>
 <div align="center">
 
 ![GitHub contributors](https://img.shields.io/github/contributors/user1342/Obfu-DE-Scate)
