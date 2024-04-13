@@ -11,7 +11,7 @@
 ![GitHub watchers](https://img.shields.io/github/watchers/user1342/Obfu-DE-Scate?style=social)
 ![GitHub last commit](https://img.shields.io/github/last-commit/user1342/Obfu-DE-Scate)
 <br>
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/P5P7C2MM6)
+
 </div>
 
 Obfu[DE]scate is a Python tool designed to simplify the process of de-obfuscating and comparing two versions of an Android APK - even if the functions have been renamed as part of obfuscation. With fuzzy comparison logic, Obfu[DE]scate can identify similarities between functions and help you uncover changes between APK versions.
