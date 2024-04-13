@@ -2,4 +2,3 @@ fuzzywuzzy
 jinja2
 tqdm
 python-Levenshtein
-androguard==3.3.5
